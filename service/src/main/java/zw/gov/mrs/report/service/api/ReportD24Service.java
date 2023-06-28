@@ -5,5 +5,5 @@ import zw.gov.mrs.report.domain.ReportD24DataView;
 import java.util.List;
 
 public interface ReportD24Service {
-    public abstract int[] getTotalMalesAndFemalesInEachAgeRange(List<ReportD24DataView> list, int lowerAge, int upperAge);
+    int[] getTotalMalesAndFemalesInEachAgeRange(List<ReportD24DataView> list, int lowerAge, int upperAge);
 }

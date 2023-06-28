@@ -34,4 +34,5 @@ public class ReportD24ServiceImpl implements ReportD24Service {
         }
         return counter;
     }
+
 }
