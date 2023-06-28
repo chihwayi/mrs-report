@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/domain?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        format_sql: 'false'
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+logging:
+  level:
+    liquibase: INFO
+server:
+  port: '8080'
