@@ -1,0 +1,36 @@
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`pass` 
+    SQL SECURITY DEFINER
+VIEW `report`.`report_d24dataview` AS
+    SELECT 
+        `a`.`art_id` AS `art_id`,
+        `a`.`art_cohort_number` AS `art_cohort_number`,
+        `a`.`art_number` AS `art_number`,
+        `a`.`birth_date` AS `birth_date`,
+        `a`.`date_enrolled` AS `date_enrolled`,
+        `a`.`person_id` AS `person_id`,
+        `a`.`sex` AS `sex`,
+        `a`.`year` AS `year`,
+        `b`.`adverse_event_status_id` AS `adverse_event_status_id`,
+        `b`.`adverse_event_status` AS `adverse_event_status`,
+        `b`.`date` AS `date`,
+        `b`.`month` AS `month`,
+        `b`.`reason_id` AS `reason_id`,
+        `b`.`reason` AS `reason`,
+        `b`.`reason_for_regimen_substitution_id` AS `reason_for_regimen_substitution_id`,
+        `b`.`reason_for_regimen_substitution` AS `reason_for_regimen_substitution`,
+        `b`.`regimen_id` AS `regimen_id`,
+        `b`.`regimen` AS `regimen`,
+        `b`.`treatment_failure_reason_id` AS `treatment_failure_reason_id`,
+        `b`.`treatment_failure_reason` AS `treatment_failure_reason`,
+        TIMESTAMPDIFF(YEAR,
+            `a`.`birth_date`,
+            CURDATE()) AS `age`,
+        COUNT(0) AS `count`
+    FROM
+        (`report`.`art_register` `a`
+        JOIN `report`.`art_current_status_register` `b` ON ((`a`.`art_id` = `b`.`art_register_id`)))
+    WHERE
+        (`b`.`regimen_line_name` = 'FIRST_LINE')
+    GROUP BY `a`.`sex` , `age`
