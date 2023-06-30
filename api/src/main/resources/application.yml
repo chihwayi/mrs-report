@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    url: jdbc:mysql://localhost:3306/domain?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
-    password: password
+    url: jdbc:mysql://localhost:3307/report?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+    password: pass
   jpa:
     properties:
       hibernate:
@@ -13,8 +13,5 @@ spring:
       ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-logging:
-  level:
-    liquibase: INFO
 server:
   port: '8080'

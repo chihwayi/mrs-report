@@ -20,27 +20,27 @@ public class ReportD24DataView implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private String artId;
+    private String art_id;
 
-    private String artCohortNumber;
-    private String artNumber;
-    private LocalDate birthDate;
-    private LocalDate dateEnrolled;
-    private String personId;
+    private String art_cohort_number;
+    private String art_number;
+    private LocalDate birth_date;
+    private LocalDate date_enrolled;
+    private String person_id;
     private String sex;
     private int year;
-    private String adverseEventStatusId;
-    private String adverseEventStatus;
+    private String adverse_event_status_id;
+    private String adverse_event_status;
     private LocalDate date;
     private int month;
-    private String reasonId;
+    private String reason_id;
     private String reason;
-    private String reasonForRegimenSubstitutionId;
-    private String reasonForRegimenSubstitution;
-    private String regimenId;
+    private String reason_for_regimen_substitution_id;
+    private String reason_for_regimen_substitution;
+    private String regimen_id;
     private String regimen;
-    private String treatmentFailureReasonId;
-    private String treatmentFailureReason;
+    private String treatment_failure_reason_id;
+    private String treatment_failure_reason;
     private int age;
     private int count;
 }
