@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import zw.gov.mrs.report.dto.Report;
+import zw.gov.mrs.report.dto2.ReportData;
 import zw.gov.mrs.report.service.api.ReportD24Service;
 
 import java.util.List;
@@ -26,6 +27,13 @@ public class ReportController {
     public ResponseEntity<List<Report>> getReportD24Result(){
 
         List<Report> report = reportD24Service.getReportWithData();
+        return new ResponseEntity<>(report, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/data", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<ReportData>> getAllReportData(){
+        List<ReportData> report = reportD24Service.getReport();
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
 }

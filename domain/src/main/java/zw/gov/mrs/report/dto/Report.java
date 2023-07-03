@@ -13,5 +13,5 @@ import java.util.List;
 @Builder
 public class Report {
     private String dataPoint;
-    private List<AgeRange> ageRanges;
+    private List<AgeRange> ageRange;
 }

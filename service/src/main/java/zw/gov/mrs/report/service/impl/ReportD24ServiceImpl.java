@@ -6,6 +6,7 @@ import zw.gov.mrs.report.domain.ReportD24DataView;
 import zw.gov.mrs.report.dto.AgeRange;
 import zw.gov.mrs.report.dto.Gender;
 import zw.gov.mrs.report.dto.Report;
+import zw.gov.mrs.report.dto2.ReportData;
 import zw.gov.mrs.report.repository.ReportD24DataViewRepository;
 import zw.gov.mrs.report.service.api.ReportD24Service;
 
@@ -103,7 +104,7 @@ public class ReportD24ServiceImpl implements ReportD24Service {
         listRange.add(ageRangeTenToFifteen);
         listRange.add(ageRangeFifteenToTwenty);
 
-        report.setAgeRanges(listRange);
+        report.setAgeRange(listRange);
 
 
         reportList.add(report);
@@ -111,6 +112,41 @@ public class ReportD24ServiceImpl implements ReportD24Service {
 
 
         return reportList;
+    }
+
+    @Override
+    public List<ReportData> getReport() {
+
+        int [] fiveToTen = getTotalMalesAndFemalesInEachAgeRange(reportD24DataViewRepository.findAll(),5,10);
+        int [] tenToFifteen = getTotalMalesAndFemalesInEachAgeRange(reportD24DataViewRepository.findAll(),10,15);
+        int [] fifteenToTwenty = getTotalMalesAndFemalesInEachAgeRange(reportD24DataViewRepository.findAll(),15,20);
+
+        List<ReportData> reportDataList = new ArrayList<>();
+        ReportData reportData = new ReportData();
+        reportData.setDataPoint("Number of Patients doing what what");
+
+        zw.gov.mrs.report.dto2.AgeRange ageRange1 = new zw.gov.mrs.report.dto2.AgeRange();
+        ageRange1.setAgeRange("5 - 10");
+        ageRange1.addGenderCount(new zw.gov.mrs.report.dto2.AgeRange.GenderCount("male",fiveToTen[0]));
+        ageRange1.addGenderCount(new zw.gov.mrs.report.dto2.AgeRange.GenderCount("female",fiveToTen[1]));
+
+        zw.gov.mrs.report.dto2.AgeRange ageRange2 = new zw.gov.mrs.report.dto2.AgeRange();
+        ageRange2.setAgeRange("10 - 15");
+        ageRange2.addGenderCount(new zw.gov.mrs.report.dto2.AgeRange.GenderCount("male",tenToFifteen[0]));
+        ageRange2.addGenderCount(new zw.gov.mrs.report.dto2.AgeRange.GenderCount("female",tenToFifteen[1]));
+
+        zw.gov.mrs.report.dto2.AgeRange ageRange3 = new zw.gov.mrs.report.dto2.AgeRange();
+        ageRange3.setAgeRange("15 - 20");
+        ageRange3.addGenderCount(new zw.gov.mrs.report.dto2.AgeRange.GenderCount("male",fifteenToTwenty[0]));
+        ageRange3.addGenderCount(new zw.gov.mrs.report.dto2.AgeRange.GenderCount("female",fifteenToTwenty[1]));
+
+        reportData.addAgeRange(ageRange1);
+        reportData.addAgeRange(ageRange2);
+        reportData.addAgeRange(ageRange3);
+
+        reportDataList.add(reportData);
+
+        return reportDataList;
     }
 
 }
